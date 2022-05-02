@@ -1,5 +1,6 @@
 package br.com.springboot.service.mapper;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -14,13 +15,23 @@ public class PautaMapper implements AbstractMapper<Pauta, PautaDTO>{
 
 	@Override
 	public List<PautaDTO> entidadesParaDTOs(List<Pauta> pautas) {
-		return null;
+		List<PautaDTO> pautaDTO = new ArrayList<PautaDTO>();
+		
+		pautas.forEach(pauta -> pautaDTO.add(
+				PautaDTO.builder()
+				.id(pauta.getId())
+				.descricao(pauta.getDescricao())
+				.build()));
+		
+		return pautaDTO;
 	}
 
 	@Override
 	public PautaDTO entidadeParaDTO(Pauta entidade) {
-		// TODO Auto-generated method stub
-		return null;
+		return PautaDTO.builder()
+				.id(entidade.getId())
+				.descricao(entidade.getDescricao())
+				.build();
 	}
 
 }

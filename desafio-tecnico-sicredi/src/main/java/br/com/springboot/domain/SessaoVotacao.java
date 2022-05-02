@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.springboot.domain.enums.IndicadorSessaoAberta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,19 +28,22 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table(schema = "heroku_09bec3880e95823", name = "pauta")
-public class Pauta implements Serializable{
+@Table(schema = "heroku_09bec3880e95823", name = "sessao_votacao")
+public class SessaoVotacao implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID_PAUTA")
+	@Column(name = "ID_SESSAO_VOTACAO")
 	private Long id;
 	
-	@NonNull
-	@Column(name = "DESC_PAUTA")
-	private String descricao;
+	@ManyToOne
+	@JoinColumn(name = "ID_PAUTA")
+	private Pauta pauta;
 
-	
+	@NonNull
+	@Column(name = "IND_SESSAO_ABERTA")
+	private IndicadorSessaoAberta indicadorSessaoAberta;
+
 }

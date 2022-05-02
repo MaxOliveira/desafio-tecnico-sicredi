@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.springboot.Repository.PautaRepository;
 import br.com.springboot.domain.Pauta;
 import br.com.springboot.service.dto.PautaDTO;
+import br.com.springboot.service.mapper.PautaMapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -16,19 +17,20 @@ public class PautaService {
 
 	@Autowired
 	private PautaRepository pautaRepository;
+	private PautaMapper pautaMapper;
 	
-	public List<Pauta> buscarPautas( ) {
-		return pautaRepository.findAll();		
+	public List<PautaDTO> buscarPautas( ) {
+		return pautaMapper.entidadesParaDTOs(pautaRepository.findAll());		
 	}
 	
-	public Pauta criarPauta(PautaDTO pautaDTO) {
+	public PautaDTO criarPauta(PautaDTO pautaDTO) {
 		Pauta pauta = Pauta.builder()
 		.descricao(pautaDTO.getDescricao())
 		.build();
 		
 		pautaRepository.save(pauta);
 		
-		return pauta;
+		return pautaMapper.entidadeParaDTO(pauta);
 	}
 	
 	
