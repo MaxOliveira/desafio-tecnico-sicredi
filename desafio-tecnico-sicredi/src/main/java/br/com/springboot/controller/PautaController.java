@@ -26,7 +26,6 @@ public class PautaController {
 	
 	@PostMapping("/criar")
 	public ResponseEntity<PautaDTO> criarPauta(@RequestBody PautaDTO pautaDTO) {
-		pautaService.criarPauta(pautaDTO);
 		return ResponseEntity.ok(pautaService.criarPauta(pautaDTO));
 	}
 }
