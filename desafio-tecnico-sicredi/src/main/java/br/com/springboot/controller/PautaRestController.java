@@ -15,7 +15,7 @@ import br.com.springboot.service.dto.PautaDTO;
 
 @RestController
 @RequestMapping("/pauta")
-public class PautaController {
+public class PautaRestController {
 	@Autowired
 	private PautaService pautaService;
 

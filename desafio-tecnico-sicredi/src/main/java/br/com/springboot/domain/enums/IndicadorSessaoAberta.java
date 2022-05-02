@@ -10,12 +10,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum IndicadorSessaoAberta {
 	
-	 S(Boolean.TRUE),
-     N(Boolean.FALSE);
+	 S("S"),
+     N("N");
 
-	 private final Boolean valor;
+	 private final String valor;
 
-	 public static IndicadorSessaoAberta getIndicador(Boolean valor) {
+	 public static IndicadorSessaoAberta getIndicador(String valor) {
 	     for (IndicadorSessaoAberta indicador : IndicadorSessaoAberta.values()) {
 	          if (indicador.getValor().equals(valor)) {
 	                return indicador;

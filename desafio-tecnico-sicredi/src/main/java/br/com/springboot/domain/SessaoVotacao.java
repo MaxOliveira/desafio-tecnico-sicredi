@@ -44,6 +44,6 @@ public class SessaoVotacao implements Serializable{
 
 	@NonNull
 	@Column(name = "IND_SESSAO_ABERTA")
-	private IndicadorSessaoAberta indicadorSessaoAberta;
+	private String indicadorSessaoAberta;
 
 }
