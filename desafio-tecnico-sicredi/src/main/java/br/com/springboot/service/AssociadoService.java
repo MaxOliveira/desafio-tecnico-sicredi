@@ -22,7 +22,8 @@ public class AssociadoService {
 	private AssociadoRepository associadoRepository;
 	
 	public void cadastrarNovoAssociado(AssociadoDTO associadoDTO) throws NoPermissionException {
-		isCpfValido(associadoDTO.getCpfAssociado());
+		String CpfSemMascara = associadoDTO.getCpfAssociado().replaceAll("[^0-9]", "");
+		isCpfValido(CpfSemMascara);
 		
 		Associado associado = Associado.builder().cpfAssociado(associadoDTO.getCpfAssociado()).build();
 		associadoRepository.save(associado);
@@ -32,9 +33,9 @@ public class AssociadoService {
 	boolean isCpfValido(String cpfAssociado) throws NoPermissionException {
 		String uri = "https://user-info.herokuapp.com/users/" + cpfAssociado;
 		RestTemplate restTemplate = new RestTemplate();
-		CpfValidoDTO result = restTemplate.getForObject(uri, CpfValidoDTO.class);
+		String status = restTemplate.getForObject(uri, CpfValidoDTO.class).getStatus();
 		
-		if(result.getStatus().equals(UNABLE_TO_VOTE)) {
+		if(status.equals(UNABLE_TO_VOTE)) {
 			throw new NoPermissionException("Associado sem permissão para votar!!");
 		}
 		return true;
