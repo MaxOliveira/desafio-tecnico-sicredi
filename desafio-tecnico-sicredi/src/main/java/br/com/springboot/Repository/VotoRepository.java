@@ -1,5 +1,6 @@
 package br.com.springboot.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ import br.com.springboot.domain.Voto;
 public interface VotoRepository extends JpaRepository<Voto, Long>{
 
 	Optional<Voto> findByAssociadoAndPauta(Associado associado, Pauta pauta);
+	
+	Optional<List<Voto>> findAllByPautaId(Long idPauta);
 }

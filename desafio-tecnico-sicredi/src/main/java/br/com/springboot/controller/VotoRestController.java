@@ -2,6 +2,8 @@ package br.com.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,17 @@ public class VotoRestController {
 		votoService.votar(votoDTO);
 		return ResponseEntity.ok().build();
 	}
+	
+	@GetMapping("/contabilizar")
+	public Long contabilizarVotos() {
+		return votoService.contabilizarVotos();
+	}
+	
+	@GetMapping("/contabilizar/pauta/{idPauta}")
+	public Long contabilizarVotosPorPauta(@PathVariable Long idPauta) {
+		return votoService.contabilizarVotosPorPauta(idPauta);
+	}
+	
 	
 
 }

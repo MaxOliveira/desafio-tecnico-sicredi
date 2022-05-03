@@ -47,5 +47,13 @@ public class VotoService {
 		votoRepository.save(votoAssociado);
 			
 	}
+	
+	public Long contabilizarVotos() {
+		return (long) votoRepository.findAll().size();
+	}
+	
+	public Long contabilizarVotosPorPauta(Long idPauta) {
+		return (long) votoRepository.findAllByPautaId(idPauta).get().size();
+	}
 
 }
