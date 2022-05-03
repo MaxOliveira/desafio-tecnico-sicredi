@@ -19,5 +19,7 @@ public class SessaoVotacaoDTO implements Serializable{
 	private Long id;
 	private Pauta pauta;
 	private IndicadorSessaoAberta indicadorSessaoAberta;
+	private Long idPauta;
+	private Long tempoSessao;
 
 }
