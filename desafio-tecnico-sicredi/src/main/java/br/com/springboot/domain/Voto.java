@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,16 +25,26 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table(schema = "heroku_09bec3880e95823", name = "associado")
-public class Associado {
+@Table(schema = "heroku_09bec3880e95823", name = "voto")
+public class Voto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID_ASSOCIADO")
+	@Column(name = "ID_VOTO")
 	private Long id;
 	
+	@ManyToOne
 	@NonNull
-	@Column(name = "CPF_ASSOCIADO")
-	private String cpfAssociado;
+	@JoinColumn(name = "ID_ASSOCIADO")
+	private Associado associado;
+	
+	@ManyToOne
+	@NonNull
+	@JoinColumn(name = "ID_PAUTA_VOTO")
+	private Pauta pauta;
+	
+	@NonNull
+	@Column(name = "DESC_VOTO")
+	private String descVoto;
 
 }
