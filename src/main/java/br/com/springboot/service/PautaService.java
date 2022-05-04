@@ -19,7 +19,7 @@ public class PautaService {
 	private PautaRepository pautaRepository;
 	private PautaMapper pautaMapper;
 	
-	public List<PautaDTO> buscarPautas( ) {
+	public List<PautaDTO> buscarTodas( ) {
 		return pautaMapper.entidadesParaDTOs(pautaRepository.findAll());		
 	}
 	

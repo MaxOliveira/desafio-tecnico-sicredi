@@ -21,7 +21,7 @@ public class PautaRestController {
 
 	@GetMapping("/buscarTodas")
 	public ResponseEntity<List<PautaDTO>> buscarTodasPautas() {
-		return ResponseEntity.ok(pautaService.buscarPautas());
+		return ResponseEntity.ok(pautaService.buscarTodas());
 	}
 	
 	@PostMapping("/criar")

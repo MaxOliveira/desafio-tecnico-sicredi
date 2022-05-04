@@ -1,5 +1,7 @@
 package br.com.springboot.service;
 
+import java.util.List;
+
 import javax.naming.NoPermissionException;
 import javax.persistence.EntityNotFoundException;
 
@@ -11,6 +13,7 @@ import br.com.springboot.Repository.AssociadoRepository;
 import br.com.springboot.domain.Associado;
 import br.com.springboot.service.dto.AssociadoDTO;
 import br.com.springboot.service.dto.CpfValidoDTO;
+import br.com.springboot.service.mapper.AssociadoMapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,6 +23,7 @@ public class AssociadoService {
 	
 	@Autowired
 	private AssociadoRepository associadoRepository;
+	private AssociadoMapper associadoMapper;
 	
 	public void cadastrarNovoAssociado(AssociadoDTO associadoDTO) throws NoPermissionException {
 		String CpfSemMascara = associadoDTO.getCpfAssociado().replaceAll("[^0-9]", "");
@@ -39,6 +43,10 @@ public class AssociadoService {
 			throw new NoPermissionException("Associado sem permissão para votar!!");
 		}
 		return true;
+	}
+	
+	public List<AssociadoDTO> buscarTodos() {
+		return associadoMapper.entidadesParaDTOs(associadoRepository.findAll());
 	}
 
 }
