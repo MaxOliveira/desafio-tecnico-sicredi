@@ -28,8 +28,7 @@ public class AssociadoRestController {
 	
 	@PostMapping("/criar")
 	public ResponseEntity<AssociadoDTO> cadastrarAssociado(@RequestBody AssociadoDTO associadoDTO) throws NoPermissionException {
-		associadoService.cadastrarNovoAssociado(associadoDTO);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(associadoService.cadastrarNovoAssociado(associadoDTO));
 	}
 	
 

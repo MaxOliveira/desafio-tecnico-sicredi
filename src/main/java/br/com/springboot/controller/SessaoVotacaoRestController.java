@@ -18,8 +18,7 @@ public class SessaoVotacaoRestController {
 	
 	@PostMapping("/abrir")
 	public ResponseEntity<SessaoVotacaoDTO> abrirSessaoVotacao(@RequestBody SessaoVotacaoDTO sessaoVotacaoDTO) {
-		sessaoVotacaoService.abrirSessaoVotacao(sessaoVotacaoDTO);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(sessaoVotacaoService.abrirSessaoVotacao(sessaoVotacaoDTO));
 	}
 	
 }

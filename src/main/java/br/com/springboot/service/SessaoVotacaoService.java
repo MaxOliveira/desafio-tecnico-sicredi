@@ -13,6 +13,7 @@ import br.com.springboot.domain.Pauta;
 import br.com.springboot.domain.SessaoVotacao;
 import br.com.springboot.domain.enums.IndicadorSessaoAberta;
 import br.com.springboot.service.dto.SessaoVotacaoDTO;
+import br.com.springboot.service.mapper.SessaoVotacaoMapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -21,8 +22,9 @@ public class SessaoVotacaoService {
 	@Autowired
 	private PautaRepository pautaRepository;
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
+	private SessaoVotacaoMapper sessaoVotacaoMapper;
 	
-	public void abrirSessaoVotacao(SessaoVotacaoDTO sessaoVotacaoDTO) {
+	public SessaoVotacaoDTO abrirSessaoVotacao(SessaoVotacaoDTO sessaoVotacaoDTO) {
 		Optional<Pauta> pauta = pautaRepository.findById(sessaoVotacaoDTO.getIdPauta());
 		
 		if(!pauta.isPresent()) {
@@ -35,6 +37,7 @@ public class SessaoVotacaoService {
 		.build();
 		
 		sessaoVotacaoRepository.save(sessaoAberta);
+		return sessaoVotacaoMapper.entidadeParaDTO(sessaoAberta);
 	}
 
 }

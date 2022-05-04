@@ -31,7 +31,7 @@ public class VotoService {
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
 	private VotoMapper votoMapper;
 	
-	public void votar(VotoDTO votoDTO) {
+	public VotoDTO votar(VotoDTO votoDTO) {
 		
 		Optional.ofNullable(sessaoVotacaoRepository.sessaoVotacaoAberta(votoDTO.getIdPauta())
 				.orElseThrow(() -> new EntityNotFoundException("Não existe sessão de votação aberta para esta pauta!!")));
@@ -56,7 +56,7 @@ public class VotoService {
 				.build();
 		
 		votoRepository.save(votoAssociado);
-			
+			return votoMapper.entidadeParaDTO(votoAssociado);
 	}
 	
 	public Long contabilizarVotos() {

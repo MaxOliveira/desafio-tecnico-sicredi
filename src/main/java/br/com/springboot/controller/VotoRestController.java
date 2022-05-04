@@ -23,8 +23,7 @@ public class VotoRestController {
 	
 	@PostMapping("/votar")
 	public ResponseEntity<VotoDTO> receberVotos(@RequestBody VotoDTO votoDTO) {
-		votoService.votar(votoDTO);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(votoService.votar(votoDTO));
 	}
 	
 	@GetMapping("/contabilizar")

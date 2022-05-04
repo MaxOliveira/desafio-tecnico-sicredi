@@ -25,13 +25,14 @@ public class AssociadoService {
 	private AssociadoRepository associadoRepository;
 	private AssociadoMapper associadoMapper;
 	
-	public void cadastrarNovoAssociado(AssociadoDTO associadoDTO) throws NoPermissionException {
+	public AssociadoDTO cadastrarNovoAssociado(AssociadoDTO associadoDTO) throws NoPermissionException {
 		String CpfSemMascara = associadoDTO.getCpfAssociado().replaceAll("[^0-9]", "");
 		isCpfValido(CpfSemMascara);
 		
 		Associado associado = Associado.builder().cpfAssociado(associadoDTO.getCpfAssociado()).build();
 		associadoRepository.save(associado);
 		
+		return 	associadoMapper.entidadeParaDTO(associado);
 	}
 	
 	boolean isCpfValido(String cpfAssociado) throws NoPermissionException {
