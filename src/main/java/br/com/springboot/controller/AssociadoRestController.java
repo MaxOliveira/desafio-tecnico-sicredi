@@ -21,7 +21,7 @@ public class AssociadoRestController {
 	@Autowired
 	private AssociadoService associadoService;
 	
-	@GetMapping("/buscarTodos")
+	@GetMapping("/buscar-todos")
 	public ResponseEntity<List<AssociadoDTO>> buscarTodos() {
 		return ResponseEntity.ok(associadoService.buscarTodos());
 	}
