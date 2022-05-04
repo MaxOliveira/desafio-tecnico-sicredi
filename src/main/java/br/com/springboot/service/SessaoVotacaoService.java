@@ -25,7 +25,7 @@ public class SessaoVotacaoService {
 	public void abrirSessaoVotacao(SessaoVotacaoDTO sessaoVotacaoDTO) {
 		Optional<Pauta> pauta = pautaRepository.findById(sessaoVotacaoDTO.getIdPauta());
 		
-		if(pauta.isEmpty()) {
+		if(!pauta.isPresent()) {
 			throw new EntityNotFoundException("Pauta com id " + sessaoVotacaoDTO.getIdPauta() + " não existe na base de dados!");
 		}
 		
