@@ -1,5 +1,6 @@
 package br.com.springboot.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -17,6 +18,7 @@ import br.com.springboot.domain.Pauta;
 import br.com.springboot.domain.SessaoVotacao;
 import br.com.springboot.domain.Voto;
 import br.com.springboot.service.dto.VotoDTO;
+import br.com.springboot.service.mapper.VotoMapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -27,10 +29,11 @@ public class VotoService {
 	private AssociadoRepository associadoRepository;
 	private PautaRepository pautaRepository;
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
+	private VotoMapper votoMapper;
 	
 	public void votar(VotoDTO votoDTO) {
 		
-		Optional<SessaoVotacao> sessaoVotacaoAberta = Optional.ofNullable(sessaoVotacaoRepository.sessaoVotacaoAberta(votoDTO.getIdPauta())
+		Optional.ofNullable(sessaoVotacaoRepository.sessaoVotacaoAberta(votoDTO.getIdPauta())
 				.orElseThrow(() -> new EntityNotFoundException("Não existe sessão de votação aberta para esta pauta!!")));
 				
 				
@@ -64,4 +67,7 @@ public class VotoService {
 		return (long) votoRepository.findAllByPautaId(idPauta).get().size();
 	}
 
+	public List<VotoDTO> buscarTodos() {
+		return votoMapper.entidadesParaDTOs(votoRepository.findAll());
+	}
 }

@@ -1,5 +1,7 @@
 package br.com.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class VotoRestController {
 	private VotoService votoService;
 	
 	@PostMapping("/votar")
-	public ResponseEntity<VotoDTO> votar(@RequestBody VotoDTO votoDTO) {
+	public ResponseEntity<VotoDTO> receberVotos(@RequestBody VotoDTO votoDTO) {
 		votoService.votar(votoDTO);
 		return ResponseEntity.ok().build();
 	}
@@ -33,6 +35,11 @@ public class VotoRestController {
 	@GetMapping("/contabilizar/pauta/{idPauta}")
 	public Long contabilizarVotosPorPauta(@PathVariable Long idPauta) {
 		return votoService.contabilizarVotosPorPauta(idPauta);
+	}
+	
+	@GetMapping("/buscar-todos")
+	public ResponseEntity<List<VotoDTO>> buscarTodos() {
+		return ResponseEntity.ok(votoService.buscarTodos());
 	}
 	
 	
