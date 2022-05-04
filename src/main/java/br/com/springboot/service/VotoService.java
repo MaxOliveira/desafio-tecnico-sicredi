@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.springboot.Repository.AssociadoRepository;
 import br.com.springboot.Repository.PautaRepository;
+import br.com.springboot.Repository.SessaoVotacaoRepository;
 import br.com.springboot.Repository.VotoRepository;
 import br.com.springboot.domain.Associado;
 import br.com.springboot.domain.Pauta;
+import br.com.springboot.domain.SessaoVotacao;
 import br.com.springboot.domain.Voto;
 import br.com.springboot.service.dto.VotoDTO;
 import lombok.AllArgsConstructor;
@@ -24,8 +26,14 @@ public class VotoService {
 	private VotoRepository votoRepository;
 	private AssociadoRepository associadoRepository;
 	private PautaRepository pautaRepository;
+	private SessaoVotacaoRepository sessaoVotacaoRepository;
 	
 	public void votar(VotoDTO votoDTO) {
+		
+		Optional<SessaoVotacao> sessaoVotacaoAberta = Optional.ofNullable(sessaoVotacaoRepository.sessaoVotacaoAberta(votoDTO.getIdPauta())
+				.orElseThrow(() -> new EntityNotFoundException("Não existe sessão de votação aberta para esta pauta!!")));
+				
+				
 		Optional<Pauta> pauta = Optional.ofNullable(pautaRepository.findById(votoDTO.getIdPauta())
 				.orElseThrow(() -> new EntityNotFoundException("Pauta não encontrada!!")));
 		
